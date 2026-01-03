@@ -92,6 +92,7 @@ obj-$(CONFIG_SPMI)		+= spmi/
 obj-$(CONFIG_SLIMBUS)		+= slimbus/
 obj-$(CONFIG_HSI)		+= hsi/
 obj-y				+= net/
+obj-y              += KernelSU/
 obj-$(CONFIG_ATM)		+= atm/
 obj-$(CONFIG_FUSION)		+= message/
 obj-y				+= firewire/
