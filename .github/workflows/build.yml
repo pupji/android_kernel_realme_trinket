@@ -1,0 +1,28 @@
+name: Kernel Build
+
+on:
+  push:
+    branches:
+      - kernel.lnx.4.14.r4-rel
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup build deps
+      run: |
+        sudo apt update
+        sudo apt install -y bc bison flex libssl-dev \
+          build-essential clang llvm lld \
+          gcc-aarch64-linux-gnu
+
+    - name: Build kernel
+      run: |
+        export ARCH=arm64
+        export SUBARCH=arm64
+        export CROSS_COMPILE=aarch64-linux-gnu-
+        make realme-trinket_defconfig
+        make -j$(nproc) Image.gz-dtb
